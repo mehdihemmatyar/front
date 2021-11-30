@@ -12,68 +12,67 @@
     </head>
 
 
-      <script>
-
     function addOptions(select, vaules){
-        // first delete previous options
-        while (select.length > 0){
-            select.remove(0)
-        }
-
-        for (const val of vaules){
-            console.log(val)
-            var opt = document.createElement('option');
-            opt.value = val;
-            opt.innerHTML = val;
-            select.appendChild(opt);
-        }
+    // first delete previous options
+    while (select.length > 0){
+        select.remove(0)
     }
 
-    function setFilterValues() {
-        filter_values = {
-            "province": ["ALBORZ", "BUSHEHR", "TEHRAN", "KHOUZESTAN", "CHAHARMAHAL BAKHTIARI", "ARDABIL", "EAST AZERBAIJAN"],
-            "cbp": ["105", "113", "123", "133", "143", "103"],
-            "ratinggroup": ["100- Rubika", "10- Half-Price", "4"],
-        }
+    for (const val of vaules){
+        console.log(val)
+        var opt = document.createElement('option');
+        opt.value = val;
+        opt.innerHTML = val;
+        select.appendChild(opt);
+    }
+}
 
-        var filter_type_list = document.getElementById("aggregation_column");
-        var filter_values_list = document.getElementById("aggregation_value");
-        var aggregation_column_name = filter_type_list.options[filter_type_list.selectedIndex].text;
-
-        addOptions(filter_values_list, filter_values[aggregation_column_name])
+function setFilterValues() {
+    filter_values = {
+        "province": ["ALBORZ", "BUSHEHR", "TEHRAN", "KHOUZESTAN", "CHAHARMAHAL BAKHTIARI", "ARDABIL", "EAST AZERBAIJAN"],
+        "cbp": ["105", "113", "123", "133", "143", "103"],
+        "ratinggroup": ["100- Rubika", "10- Half-Price", "4"],
     }
 
-    function addImage(imageUrl, images){
-        img = document.createElement("img")
-        img.src = imageUrl
-        images.appendChild(img)
-    }
+    var filter_type_list = document.getElementById("aggregation_column");
+    var filter_values_list = document.getElementById("aggregation_value");
+    var aggregation_column_name = filter_type_list.options[filter_type_list.selectedIndex].text;
 
-    function getImages(){
-        url = "http://vps2.siavoshani.ir:60800/api/v1/data/filter/"
-        var aggreagation_column_list = document.getElementById("aggregation_column");
-        var aggreagation_values_list = document.getElementById("aggregation_value");
-        var prediction_models_select = document.getElementById("prediction_model");
-        data = {
-            filter_type: aggreagation_column_list.options[aggreagation_column_list.selectedIndex].text,
-            filter_value: aggreagation_values_list.options[aggreagation_values_list.selectedIndex].text,
-            prediction_model: prediction_models_select.options[prediction_models_select.selectedIndex].text
-        }
-        fetch(url, {method:'POST', headers: {'Accept': 'application/json','Content-Type': 'application/json'}, body: JSON.stringify(data)})
-            .then(response => response.json())
-            .then(json_resp => {
-                console.log(json_resp)
-                images = document.getElementById("images")
-                while (images.childNodes.length > 0){
-                    images.removeChild(images.childNodes[0])
-                }
-                for (const val of json_resp){
-                    addImage(val, images)
-                }
-            })
-    }
-    </script>
+    addOptions(filter_values_list, filter_values[aggregation_column_name])
+}
 
+function addImage(imageUrl, images){
+    img = document.createElement("img")
+    img.src = imageUrl
+    images.appendChild(img)
+}
+
+function getImages(){
+    url = "http://vps2.siavoshani.ir:60800/api/v1/data/filter/"
+    var aggreagation_column_list = document.getElementById("aggregation_column");
+    var aggreagation_values_list = document.getElementById("aggregation_value");
+    var prediction_models_select = document.getElementById("prediction_model");
+    data = {
+        filter_type: aggreagation_column_list.options[aggreagation_column_list.selectedIndex].text,
+        filter_value: aggreagation_values_list.options[aggreagation_values_list.selectedIndex].text,
+        prediction_model: prediction_models_select.options[prediction_models_select.selectedIndex].text,
+        z: document.getElementById("z").value,
+        interval_width: document.getElementById("interval").value
+    }
+    fetch(url, {method:'POST', headers: {'Accept': 'application/json','Content-Type': 'application/json'}, body: JSON.stringify(data)})
+        .then(response => response.json())
+        .then(json_resp => {
+            console.log(json_resp)
+            images = document.getElementById("images")
+            while (images.childNodes.length > 0){
+                images.removeChild(images.childNodes[0])
+            }
+            for (const val of json_resp){
+                addImage(val, images)
+            }
+        })
+}
+</script>
 
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
