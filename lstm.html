@@ -59,7 +59,10 @@
           filter_value: aggreagation_values_list.options[aggreagation_values_list.selectedIndex].text,
           prediction_model: prediction_models_select.options[prediction_models_select.selectedIndex].text,
           z: document.getElementById("z").value,
-          interval_width: document.getElementById("interval").value
+          interval_width: document.getElementById("interval").value,
+          start_time: document.getElementById("start_time").value,
+          end_time: document.getElementById("end_time").value
+
       }
       fetch(url, {method:'POST', headers: {'Accept': 'application/json','Content-Type': 'application/json'}, body: JSON.stringify(data)})
           .then(response => response.json())
@@ -174,7 +177,7 @@
                                 <br>
                                 <b> Select the prediction model </b>
                                 <select class="form-control" id="prediction_model">
-                                    <option> fbprophet </option>
+                                    <option> lstm </option>
 
                                     <select/>
                                 <div class="text-secondary">
@@ -197,6 +200,12 @@
                                 lower interval width decreases anomaly rate.
                             </div>
                                 <b>interval width</b> <input class="form-control" type="text" id="interval">
+
+                                <b>start time</b> <input class="form-control" type="text" id="start_time">
+
+                                <b>end time</b> <input class="form-control" type="text" id="end_time">
+
+
 
                                 <button type="button" class="btn btn-primary btn-lg" onclick="getImages()">Get Graphs</button>
                                 <br>
