@@ -153,14 +153,14 @@
                                 <i class="fas fa-chart-area me-1"></i>
                                 <br>
 
-                                <b> Select filter type: </b>
+                                <b> Select filter type </b>
                                 <select class="form-control" id="aggregation_column" onchange = "setFilterValues()" >
                                     <option> province </option>
                                     <option> cbp </option>
                                     <option> ratinggroup </option>
                                 </select>
                                 <br>
-                                <b> Select the filter value: </b>
+                                <b> Select the filter value </b>
                                 <select class="form-control" id="aggregation_value">
                                     <option> ALBORZ </option>
                                     <option> BUSHEHR </option>
@@ -172,38 +172,36 @@
                                 </select>
 
                                 <br>
-                                <b> Select the prediction model: </b>
+                                <b> Select the prediction model </b>
                                 <select class="form-control" id="prediction_model">
-                                    <option> lstm </option>
+                                    <option> fbprophet </option>
 
                                     <select/>
-                                    <div class="text-secondary">
-                                Interval width<br>
-                                method 2<br>
-                                Range:  between 0 and 1
-                                Uncertainty degree of prediction method used in student-t interval.        <br>
-                                lower interval width decreases anomaly rate.<br>
-<br>
-                                -------
-                                Z<br>
+                                <div class="text-secondary">
+                                <b>z</b><br>
                                 Multiplier used in method 1<br>
                                 In method 1, result of multiplying this parameter by standard deviation will be used as interval length
-                                Suggested values:
+                                Suggested values:<br>
                                 1. 1.15 for 75% certainty<br>
                                 2. 1.64 fot 90% certainty<br>
                                 3. 1.96 for 95% certainty<br>
                                 4. 2.58 for 99% certainty<br>
                               </div>
 
-                                z: <input class="form-control" type="text" id="z">
-                                    <br>
-                                interval width: <input class="form-control" type="text" id="interval">
-                                <br>
+                                <b>z</b> <input class="form-control" type="text" id="z">
+
+                                <div class="text-secondary">
+                                  <b>interval width</b><br>
+                                Range:  between 0 and 1<br>
+                                Uncertainty degree of prediction method used in student-t interval.<br>
+                                lower interval width decreases anomaly rate.
+                            </div>
+                                <b>interval width</b> <input class="form-control" type="text" id="interval">
 
                                 <button type="button" class="btn btn-primary btn-lg" onclick="getImages()">Get Graphs</button>
                                 <br>
                                 <div id="images"></div>
-                            </div>
+                              </div>
 
 
                         </div>
