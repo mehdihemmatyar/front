@@ -14,6 +14,10 @@
 
     <script>
 
+      $("#button").click(function() {
+        $(".loader-wrapper").show();;
+        });
+
         setTimeout(function(){
             $(".loader-wrapper").fadeOut("slow")}, 5);
 
@@ -69,11 +73,16 @@
                 aggregation_column_name: aggreagation_column_list.options[aggreagation_column_list.selectedIndex].text,
                 aggregation_value: aggreagation_values_list.options[aggreagation_values_list.selectedIndex].text
             }
+            document.getElementById("images").innerHTML = `<div class="spinner-border" role="status">
+                                                  <span class="visually-hidden">Loading...</span>
+                                                      </div> `
             fetch(url, {method:'POST', headers: {'Accept': 'application/json','Content-Type': 'application/json'}, body: JSON.stringify(data)})
                 .then(response => response.json())
                 .then(json_resp => {
                     console.log(json_resp)
                     images = document.getElementById("images")
+                    images.innerHTML = " "
+
                     while (images.childNodes.length > 0){
                         images.removeChild(images.childNodes[0])
                     }
@@ -180,7 +189,6 @@
 
                                     <button cype="button" class="btn btn-primary btn-lg" onclick="getImages()">Get Graphs</button>
                                     <br>
-
 
                                     <div class="card mb-4" id="images"></div>
 

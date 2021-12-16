@@ -64,11 +64,16 @@
           end_time: document.getElementById("end_time").value
 
       }
+
+      document.getElementById("images").innerHTML = `<div class="spinner-border" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                                </div> `
       fetch(url, {method:'POST', headers: {'Accept': 'application/json','Content-Type': 'application/json'}, body: JSON.stringify(data)})
           .then(response => response.json())
           .then(json_resp => {
               console.log(json_resp)
               images = document.getElementById("images")
+              images.innerHTML = " "
               while (images.childNodes.length > 0){
                   images.removeChild(images.childNodes[0])
               }
